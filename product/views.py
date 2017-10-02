@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from product.models import Product
 from product.serializers import UserSerializer
+from rest_framework.decorators import authentication_classes, permission_classes
 
 @api_view(['GET', 'POST'])
 def product_list(request):
@@ -19,6 +20,8 @@ def product_list(request):
     return Response(serializers.errors,status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET','PUT','DELETE'])
+@authentication_classes([])
+@permission_classes([])
 def product_details(request,pk):
 
     try:
